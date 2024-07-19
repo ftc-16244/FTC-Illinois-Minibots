@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.drive.MecanumDriveBase;
+import org.firstinspires.ftc.teamcode.subsytems.Gripper;
 
 @Config
 @TeleOp(group = "Teleop")
@@ -19,6 +20,7 @@ public class SimpleTeleop extends LinearOpMode {
     private final float TELEOP_TIME_OUT = 140; // WARNING: LOWER FOR OUTREACH
 
     FtcDashboard dashboard;
+    Gripper gripper = new Gripper(this);
 
     double speedFactor = 1.0;
     @Override
@@ -27,6 +29,9 @@ public class SimpleTeleop extends LinearOpMode {
         MecanumDriveBase drive = new MecanumDriveBase(hardwareMap); // this has to be here inside the runopmode. The others go above as class variables
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+        gripper.init(hardwareMap);
+
+
         dashboard = FtcDashboard.getInstance();
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
@@ -34,6 +39,9 @@ public class SimpleTeleop extends LinearOpMode {
         ////////////////////////////////////////////////////////////////////////////////////////////
         // WAIT FOR MATCH TO START
         ///////////////////////////////////////////////////////////////////////////////////////////
+
+        gripper.gripperClosed();
+        gripper.setAnglerDown();
 
         waitForStart();
         teleopTimer.reset();
@@ -46,6 +54,22 @@ public class SimpleTeleop extends LinearOpMode {
                             -gamepad1.right_stick_x * speedFactor
                     )
             );
+
+            if(gamepad1.right_trigger > 0.25){
+                gripper.gripperOpen();
+            }
+
+            if(gamepad1.left_trigger > 0.25){
+                gripper.gripperClosed();
+            }
+
+            if(gamepad1.right_bumper){
+                gripper.setAnglerUP();
+            }
+
+            if(gamepad1.left_bumper){
+                gripper.setAnglerDown();
+            }
         }
     }
 }
