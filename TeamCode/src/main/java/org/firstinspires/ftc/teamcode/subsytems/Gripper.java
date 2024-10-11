@@ -51,7 +51,8 @@ public class Gripper {
     public void init(HardwareMap hwMap)  {
 
         // Initialize the gripper
-        gripper = hwMap.get(Servo.class,"gripper"); //Exp Hub port 4
+        gripper = hwMap.get(Servo.class,"gripper"); //Exp Hub port 1
+
         angler = hwMap.get(Servo.class,"angler"); // Exp Hub port 0
 
 
