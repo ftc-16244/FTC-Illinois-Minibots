@@ -75,7 +75,6 @@ public class MecanumDriveBase extends MecanumDrive {
     private DcMotorEx leftFront, leftRear, rightRear, rightFront;
     private List<DcMotorEx> motors;
 
-    private IMU imu = null;      // Control/Expansion Hub IMU
     private VoltageSensor batteryVoltageSensor;
 
     AngularVelocity angularVelocity;
@@ -138,6 +137,7 @@ public class MecanumDriveBase extends MecanumDrive {
 
         leftFront.setDirection(DcMotor.Direction.REVERSE);
         leftRear.setDirection(DcMotor.Direction.REVERSE);
+        rightRear.setDirection(DcMotor.Direction.REVERSE);
 
         for (DcMotorEx motor : motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
@@ -326,8 +326,8 @@ public class MecanumDriveBase extends MecanumDrive {
     public Double getExternalHeadingVelocity() {
 
         //return (double) imu.getAngularVelocity().xRotationRate;
-        angularVelocity = imu.getRobotAngularVelocity(AngleUnit.RADIANS);
-        float zRotationRate = angularVelocity.zRotationRate;
+        //angularVelocity = imu.getRobotAngularVelocity(AngleUnit.RADIANS);
+        //float zRotationRate = angularVelocity.zRotationRate;
        //return  (double) zRotationRate;
         return (double) 0; //55.0;
     }
