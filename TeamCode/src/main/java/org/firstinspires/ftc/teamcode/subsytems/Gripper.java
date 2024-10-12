@@ -26,7 +26,7 @@ public class Gripper {
     //Constants for gripper
     //larer numbers are more clockwise
 
-    private static final double      GRIPPER_CLOSED      = 0.6; //to close more, increase
+    private static final double      GRIPPER_CLOSED      = 0.495;//to close more, increase
     private static final double      GRIPPER_OPEN        = 0.39; //to open more, decrease
 
 
